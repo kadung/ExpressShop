@@ -1,28 +1,30 @@
 To do:
 	- Connect to mongodb: Mongoose	
-	- Storefront
+	- Storefront:
 		. Database schema
 		. UI
 	- Cart - Checkout
+    - User authentication
 	- Administration
 		. Database schema
 		. UI
 
 Ref:
 	- https://github.com/AdamRisberg/react-express-cart
+    - https://expresscart.markmoffat.com/
 
 -------------------------------------------------------------------------------------------------------------
-React SSR: https://github.com/reactjs/express-react-views
++ A shop builds by Express + React + MongoDB.
 
-Project structure:
-    1. app/controller: define route handlers.
-    2. app/middlewares: define function interpreted all incoming requests before moving to the route handler.
-    3. app/models: database schemes and validations.
-    4. app/routes: define app routes.
-    5. app/services: define bussiness logic
-    6. app/views: contains templates to be rendered by the server.
-    7. app.js: Initialize express app and setup other elements
-    8. bin/www: bootstrap express server
-    9. /public: store static images in/img, custom JavaScript files, and CSS /css
-    10. /test: contains all test cases
-    11. /utils: helper functions 
++ Project structure:
+    - app/controller: define route handlers.
+    - app/middlewares: define function interpreted all incoming requests before moving to the route handler.
+    - app/models: database schemes and validations.
+    - app/routes: define app routes.
+    - app/services: define bussiness logic
+    - app/views: contains templates to be rendered by the server.
+    - app.js: Initialize express app and setup other elements
+    - bin/www: bootstrap express server
+    - public: store static images in/img, custom JavaScript files, and CSS /css
+    - test: contains all test cases
+    - utils: helper functions 
