@@ -1,0 +1,63 @@
+Ref:
+    1. https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms
+
+---------------------------------------------------------------------------------------
+    Overview
+---------------------------------------------------------------------------------------
+- The form is defined in HTML as a collection of elements inside <form>...</form> tags,
+containing at least one input element of type="submit".
+
+    <form action="/team_name_url/" method="post">
+        <label for="team_name">Enter name: </label>
+        <input id="team_name" type="text" name="name_field" value="Default name for team.">
+        <input type="submit" value="OK">
+    </form>
+
+With:
+    + action: The resource/URL where data is to be sent for processing when the form is 
+    submitted. If this is not set (or set to an empty string), then the form will be 
+    submitted back to the current page URL.
+    + method: The HTTP method used to send the data: POST or GET.
+    + name, id: identify the field in JavaScript/CSS/HTML.
+    + value: defines the initial value for the field when it is first displayed.
+    + type="submit": is a button (by default)
+    
+
+---------------------------------------------------------------------------------------
+    Form handling process
+---------------------------------------------------------------------------------------
+- A process flowchart for processing form requests:
+    1. Display the form when it is requested by the user using GET request. The form may
+    contain blank fields (ex: creating a new record), or it may be pre-populated with 
+    initial values (ex: changing a record).
+    
+    2. Receive data submitted by the user, usually in an HTTP POST request.
+    
+    3. Validate and sanitize the data.
+    
+    4. If any data is invalid, re-display the form—this time with any user populated 
+    values and error messages for the problem fields.
+    
+    5. If all data is valid, perform required actions (ex: save the data in the database,
+    send a notification email, return the result of a search, upload a file, etc.)
+    
+    6. Once all actions are complete, redirect the user to another page.
+
+- Express doesn't provide any specific support for form handling operations, but it can
+use middleware to process POST and GET parameters from the form, and to validate or 
+sanitize their values.
+
+
+---------------------------------------------------------------------------------------
+    Validation and sanitization
+---------------------------------------------------------------------------------------
+- Before the data from a form is stored it must be validated and sanitized:
+    + Validation checks that entered values are appropriate for each field (are in the
+    right range, format, etc.) and that values have been supplied for all required fields.
+
+    + Sanitization removes or replaces characters in the data that might potentially be 
+    used to send malicious content to the server.
+
+- We can use the popular express-validator module to perform both validation and 
+sanitization of our form data.
+

@@ -1,0 +1,53 @@
+Ref:
+    1. 
+    
+---------------------------------------------------------------------------------------
+    Express application generator
+---------------------------------------------------------------------------------------
+- Express application generator is a tool to quickly create a express MVC application 
+skeleton.
+
+- Install: 
+    npm install express-generator -g
+
+- Help:
+    express -h    
+
+- Create an express app with pug template engine:
+    express --view=pug myapp
+    cd myapp
+    npm install
+    set DEBUG=myapp:* & npm start
+
+- Directory structure:
+    + bin: sets up a node HTTP server to a specific port, starts listening and 
+    reporting server errors and connections.
+    + models: defines Mongoose models to interact with the database.
+    + public: contains all public files which is downloaded by user.
+    + routes: forward the supported requests to the appropriate controller functions.
+    + views (templates): used by the controllers to render the data
+    + app.js: sets up the application with various settings and middleware.
+    + package.json: defines the application dependencies and other information.
+
+                            Routes    <---- HTTP requests
+                               ↓
+    Database <--Models--> Controllers ----> HTTP responses
+                               ↑
+                        Views/Templates
+---------------------------------------------------------------------------------------
+    Enable server restart on file changes
+---------------------------------------------------------------------------------------
+- Any changes you make to your Express website are not visible until you restart the 
+server, so it is worth taking the time to automate restarting the server every time 
+when you make a change.
+
+- One of the easiest such tools for this purpose is "nodemon". 
+    + Intall nodemon:
+        npm install --save-dev nodemon
+    + Add nodemon to npm script in package.json:
+        "scripts": {
+            "start": "node ./bin/www",
+            "devstart": "nodemon ./bin/www"
+        },
+ 
+- You will still need to reload the browser to refresh the page.

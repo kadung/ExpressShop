@@ -1,0 +1,33 @@
+Ref:
+    - https://javascript.info/async-await
+
+--------------------------------------------------------------------------------------
+    async keyword
+--------------------------------------------------------------------------------------
+- The async keyword is before a function or a class has two effects:
+    1. Makes a function always return a promise by wrapping the non-promise function.
+    2. Allows to use await in it.
+
+- Example:
+    async function f() {
+        return Promise.resolve(1);
+    }
+
+    f().then(alert); // 1
+
+
+--------------------------------------------------------------------------------------
+    async keyword
+-------------------------------------------------------------------------------------- 
+- The keyword await makes JavaScript wait until that promise settles and returns its 
+result. And it works only inside async functions.
+
+- Example:
+    async function f() {
+        try {
+            let response = await fetch('http://no-such-url');
+        } catch(err) {
+            alert(err); // TypeError: failed to fetch
+        }
+    }
+    f();

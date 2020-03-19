@@ -1,0 +1,81 @@
+Ref:
+    1. https://expressjs.com/en/guide/error-handling.html
+    
+---------------------------------------------------------------------------------------
+    Catching Errors
+---------------------------------------------------------------------------------------
+- Error Handling refers to how catches and processes errors that occur both sync and 
+asyn. Express comes with a default error handler so you don’t need to write your own to
+get started.
+
+- Errors that occur in synchronous code inside route handlers and middleware require no 
+extra work. If synchronous code throws an error, then Express will catch and process it.
+For example:
+    app.get('/', function (req, res) {
+        throw new Error('BROKEN')           // Express will catch this on its own.
+    })
+
+- Errors that occur in asynchronous code invoked by route handlers and middleware, you 
+must pass them to the next() function, where Express will catch and process them. For 
+example:
+    app.get('/', function (req, res, next) {
+        fs.readFile('/file-does-not-exist', function (err, data) {
+            if (err) {
+            next(err) // Pass errors to Express.
+            } else {
+            res.send(data)
+            }
+        })
+    })
+
+- If you pass anything to the next() function (except the string 'route'), Express regards
+the current request as being an error and will skip any remaining non-error handling 
+routing and middleware functions.
+
+- If the callback in a sequence provides no data, only errors, you can simplify this code
+as follows:
+    app.get('/', [
+        function (req,res,next) {
+            fs.writeFile('/inaccessible-path', 'data', next)
+        },
+        function (req, res) {
+            res.send('OK')
+        }
+    ])
+
+---------------------------------------------------------------------------------------
+    Errors Handlers
+---------------------------------------------------------------------------------------
+- Express comes with a built-in error handler that takes care of any errors that might 
+be encountered in the app. This default error-handling middleware function is added at 
+the end of the middleware function stack.
+
+- Define custom error-handling middleware functions:
+    + Same way as other middleware functions except error-handling functions have four 
+    arguments instead of three: (err, req, res, next)
+    + Error-handling functions are defined last after other middlewares 
+    + For example:
+        app.use(bodyParser.json())
+        app.use(methodOverride())
+        app.use(logErrors)
+        app.use(clientErrorHandler)
+        app.use(errorHandler)
+
+- If you have a route handler with multiple callback functions you can use the route 
+parameter to skip to the next route handler. For example:
+    app.get('/a_route_behind_paywall',
+        function checkIfPaidSubscriber (req, res, next) {
+            if (!req.user.hasPaid) {
+                // continue handling this request
+                next('route')
+            } else {
+                next()
+            }
+        }, 
+        function getPaidContent (req, res, next) {
+            PaidContent.find(function (err, doc) {
+                if (err) return next(err)
+                    res.json(doc)
+                })
+        })
+        

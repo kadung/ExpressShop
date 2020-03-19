@@ -1,0 +1,166 @@
+Ref:
+    1. https://expressjs.com/en/guide/routing.html
+
+---------------------------------------------------------------------------------------
+    Routing
+---------------------------------------------------------------------------------------
+- Routing refers to determining how an application responds to a client request to a 
+particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, 
+POST, ...)
+
+- Route definition structurein Express:   
+    app.METHOD(PATH, HANDLER)
+Where:
+    app is an instance of express
+    METHOD is an HTTP request method, in lowercase.
+    PATH is a path that the server allows.
+    HANDLER is the function executed when the route is matched.
+
+- Example:
+    var express = require('express')
+    var app = express()
+
+    // respond with "hello world" when a GET request is made to the homepage
+    app.get('/', function (req, res) {
+        res.send('hello world')
+    })
+
+---------------------------------------------------------------------------------------
+    Route method
+---------------------------------------------------------------------------------------
+- Express supports following HTTP request methods: get(), post(), delete(), options(),
+put(), checkout(), copy(), head(), lock(), merge(), mkactivity(), mkcol(), m-search(), 
+notify(),  purge(), report(), search(), subscribe(), trace(), unlock(), unsubscribe(),
+patch().
+
+- There is a special routing method, app.all(), which will be called in response to any
+HTTP method. For example, the following handler is executed for requests to the route 
+“/secret” whether using GET, POST, PUT, DELETE, or any other HTTP request method.
+    app.all('/secret', function (req, res, next) {
+        console.log('Accessing the secret section ...')
+        next() // pass control to the next handler
+    })
+
+---------------------------------------------------------------------------------------
+    Route path
+---------------------------------------------------------------------------------------
+- Route paths is the URI which web client is allow to access.
+
+- Route paths can be strings, string patterns, or regular expressions.
+
+---------------------------------------------------------------------------------------
+    Route parameters
+---------------------------------------------------------------------------------------
+- Routes allow you to match particular patterns of characters in a URL, and extract the 
+values from the URL and pass them as parameters to the route handler (as attributes of 
+the request object passed as a parameter).
+
+- The captured values are populated in the req.params object, with the name of the route
+parameter specified in the path as their respective keys.
+    Route path: /users/:userId/books/:bookId
+    Request URL: http://localhost:3000/users/34/books/8989
+    req.params: { "userId": "34", "bookId": "8989" }
+
+- To define parameter routes, simply specify the route parameters in the path:
+    app.get('/users/:userId/books/:bookId', function (req, res) {
+        res.send(req.params)
+    })
+
+- Since hyphen (-) and dot (.) are interpreted literally, they can be used along with
+route parameters for useful purposes.
+    Route path: /flights/:from-:to
+    Request URL: http://localhost:3000/flights/LAX-SFO
+    req.params: { "from": "LAX", "to": "SFO" }
+
+    Route path: /plantae/:genus.:species
+    Request URL: http://localhost:3000/plantae/Prunus.persica
+    req.params: { "genus": "Prunus", "species": "persica" }
+
+---------------------------------------------------------------------------------------
+    Route handlers
+---------------------------------------------------------------------------------------
+- Route handlers are the function executed when the route is matched.
+
+- Router handlers must either complete (respond to) the request or call the next() 
+function in the chain.
+
+- Route handlers can be in the form of as below, if multiple callback functions is used
+then these callbacks might invoke next('route') to bypass the remaining route callbacks:
+    + A function:
+        app.get('/example/a', function (req, res) {
+            res.send('Hello from A!')
+        })
+
+    + An array of functions:
+        var cb0 = function (req, res, next) {
+            console.log('CB0')
+            next()
+        }
+        var cb1 = function (req, res, next) {
+            console.log('CB1')
+            next()
+        }
+        app.get('/example/c', [cb0, cb1])
+
+    + Combinations of both:
+        app.get('/example/d', [cb0, cb1], function (req, res, next) {
+            console.log('the response will be sent by the next function ...')
+            next()
+        }, function (req, res) {
+            res.send('Hello from D!')
+        })
+
+- NOTE: If there are multiple route handlers then they are excuted with order that 
+function loaded first is also executed first.
+
+---------------------------------------------------------------------------------------
+    Response methods
+---------------------------------------------------------------------------------------
+- The methods on the response object (res) in the following table can send a response 
+to the client, and terminate the request-response cycle. If none of these methods are 
+called from a route handler, the client request will be left hanging.
+
+    Method	            Description
+    -------------------------------------------------------------
+    res.download()	    Prompt a file to be downloaded.
+    res.end()	        End the response process.
+    res.json()	        Send a JSON response.
+    res.jsonp()	        Send a JSON response with JSONP support.
+    res.redirect()	    Redirect a request.
+    res.render()	    Render a view template.
+    res.send()	        Send a response of various types.
+    res.sendFile()	    Send a file as an octet stream.
+    res.sendStatus()	Set the response status code and send its string representation 
+                        as the response body.
+
+---------------------------------------------------------------------------------------
+    Grouping routes
+---------------------------------------------------------------------------------------
+- It is useful to group route handlers for a particular part of a site together and
+access them using a common route-prefix (e.g. a site with a Wiki might have all wiki 
+related routes in one file and have them accessed with a route prefix of /wiki/).
+
+- In Express this is achieved by using the express.Router object. For example, we can 
+create our wiki route in a module named wiki.js, and then export the Router object:
+    // wiki.js - Wiki route module
+    var express = require('express');
+    var router = express.Router();
+
+    // Home page route: 
+    router.get('/', function(req, res) {
+        res.send('Wiki home page');
+    });
+
+    // About page route:
+    router.get('/about', function(req, res) {
+        res.send('About this wiki');
+    });
+
+    module.exports = router;
+
+- The two routes will then be accessible from /wiki/ and /wiki/about/ if we use the 
+router in our main app file:
+    var wiki = require('./wiki.js');
+    // ...
+    app.use('/wiki', wiki);
+

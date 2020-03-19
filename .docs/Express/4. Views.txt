@@ -1,0 +1,68 @@
+Ref:
+    1.
+
+---------------------------------------------------------------------------------------
+    Template Engines
+---------------------------------------------------------------------------------------
+- A template is a text file defining the structure or layout of an output file, with 
+placeholders used to represent where data will be inserted when the template is 
+rendered (in Express, templates are referred to as views).
+
+- A template engine enables you to use static template files in your application. At 
+runtime, the template engine replaces variables in a template file with actual values,
+and transforms the template into an HTML file sent to the client.
+
+- Some popular template engines that work with Express are Pug, Mustache, and EJS. The
+Express application generator uses Pug as its default, but it also supports several 
+others.
+
+- To render template files, set the following application setting properties, set in 
+app.js in the default app created by the generator:
+    // Set the directory where the template files are located
+    app.set('views', path.join(__dirname, 'views'));
+    // Set the template engine to use
+    app.set('view engine', 'pug');
+
+- Create a route to render a pug template which is index.pug:
+    app.get('/', function (req, res) {
+        res.render('index', { title: 'Hey', message: 'Hello there!' })
+    })
+
+
+---------------------------------------------------------------------------------------
+    Pug Engine
+---------------------------------------------------------------------------------------
+- Setup in app.js:
+    var express = require('express');
+
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'pug');
+
+     app.get('/', function(req, res){
+        res.render('index', { message: 'Hello' });
+    })
+
+- Create /views/index.pug with below code:
+     h1= message
+
+---------------------------------------------------------------------------------------
+    Nunjucks Engine
+---------------------------------------------------------------------------------------
+- Setup in app.js:
+    var express = require('express');
+    var nunjucks = require('nunjucks');
+
+    nunjucks.configure('views', {
+        autoescape: true,
+        express: app
+    });
+    app.set('view engine', 'html');
+
+    app.get('/', function(req, res){
+        retrun res.render('index', { 
+            message: 'Hello' 
+        });
+    })
+
+- Create /views/index.html with below code:
+    <h1> Title is {{message}} </h1>

@@ -1,7 +1,8 @@
-To do:
-	- Connect to mongodb: Mongoose	
+-------------------------------------------------------------------------------------
+    To Do
+-------------------------------------------------------------------------------------
 	- Storefront:
-		. Database schema
+		. Database schema + test data
 		. UI
 	- Cart - Checkout
     - User authentication
@@ -11,9 +12,12 @@ To do:
 
 Ref:
 	- https://github.com/AdamRisberg/react-express-cart
-    - https://expresscart.markmoffat.com/
+    - https://github.com/mrvautin/expressCart
 
--------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------
+    Introduction
+-------------------------------------------------------------------------------------
 + A shop builds by Express + React + MongoDB.
 
 + Project structure:
@@ -28,3 +32,17 @@ Ref:
     - public: store static images in/img, custom JavaScript files, and CSS /css
     - test: contains all test cases
     - utils: helper functions 
+
+
+-------------------------------------------------------------------------------------
+    MongoDB
+-------------------------------------------------------------------------------------
++ Start the mongodb server:
+    - Linux: mongod --noauth --dbpath "data_base_location"        
+    - Windows: [mongo_folder]/mongod.exe --noauth --dbpath "data_base_location"
+
++ Development:
+    - Linux:
+        mongod --noauth --dbpath "./mongodb"
+    - Windows:
+        "/mongod.exe" --noauth --dbpath "./mongodb"
