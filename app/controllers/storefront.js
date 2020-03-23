@@ -1,4 +1,4 @@
 
 exports.index = (req, res, next) => {
-    res.render('pages/storefront', { name: 'Express' });
+    res.render('storefront/pages/index', { name: 'Express' });
 }

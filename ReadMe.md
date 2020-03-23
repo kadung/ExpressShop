@@ -1,14 +1,22 @@
 -------------------------------------------------------------------------------------
-    To Do
+    Note
 -------------------------------------------------------------------------------------
-	- Storefront:
-		. Database schema + test data
-		. UI
-	- Cart - Checkout
-    - User authentication
-	- Administration
-		. Database schema
-		. UI
++ Remove port 3000:
+    sudo netstat -ap | grep :3000
+    // cp6  0  0  [::]:3000  [::]:*  LISTEN  [pid_number]/node 
+    kill [pid_number]
+
+
++ To do
+        Items                   Staus
+    Storefront model            Done
+	Storefront test data        
+	Storefront UI
+	Cart/Checkout model
+    Cart/Checkout UI
+    Administration schema
+    Administration test data
+    Administration UI
 
 Ref:
 	- https://github.com/AdamRisberg/react-express-cart
