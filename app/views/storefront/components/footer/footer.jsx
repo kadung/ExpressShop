@@ -1,12 +1,8 @@
 import React from 'react'
 
 const Footer = () => {
-    const style = {
-        'textAlign': 'center'
-    };
-
     return (
-        <div id='Footer' style={style}>
+        <div id='Footer' className="text-center">
             <hr />
             Power by electricity
         </div>

@@ -1,18 +1,18 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var app = express();
+let app = express();
 
 
 // mongodb
-// var mongoAddress = 'mongodb://127.0.0.1/shop';
-// mongoose.connect(mongoAddress, { useNewUrlParser: true });
+var mongoAddress = 'mongodb://127.0.0.1/shop';
+mongoose.connect(mongoAddress, { useNewUrlParser: true });
 
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // view engine

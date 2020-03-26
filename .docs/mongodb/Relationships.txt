@@ -1,0 +1,128 @@
+Ref:
+    1. https://mongoosejs.com/docs/schematypes.html
+    2. http://learnmongodbthehardway.com/schema/schemabasics/
+ 
+
+---------------------------------------------------------------------------------------
+    One-To-One (1:1)
+---------------------------------------------------------------------------------------
++ The 1:1 relationship describes a relationship between two entities.
+
++ In MongoDB, the 1:1 relationship can be modeled in two ways:
+    - Embedding
+    - Linking via Foreign Key.
+
++ EX: An User lives at a single Address and an Address only contains a single Author.
+    - Embedding: refer way in monggo
+        {
+            name: "Peter Wilkinson",
+            age: 27,
+            address: {
+                street: "100 some road",
+                city: "Nevermore"
+            }
+        }
+
+    - Linking:
+        // User collection
+        {
+            _id: 1,
+            name: "Peter Wilkinson",
+            age: 27
+        }
+        // Address collection
+        {
+            user_id: 1,
+            street: "100 some road",
+            city: "Nevermore"
+        }
+
+
+---------------------------------------------------------------------------------------
+    One-To-Many (1:N)
+---------------------------------------------------------------------------------------
++ The 1:N relationship describes a relationship where one side can have more than one
+relationship while the reverse relationship can only be single sided.
+
++ In MongoDB, the 1:N relationship can be modeled in several different ways (may update
+more): 
+
++ EX: Each Blog Post we can have one or more Comments.    
+    - Linking via Foreign Key:
+        // Blog Post
+        {
+            _id: 1,
+            title: "An awesome blog",
+            text: "This is an awesome blog we have just started"
+        }
+        // Comment documents with Foreign Keys
+        {
+            blog_entry_id: 1,
+            name: "Peter Critic",
+            comment: "Awesome blog post"
+        }
+        {
+            blog_entry_id: 1,
+            name: "John Page",
+            comment: "Not so awesome blog"
+        }
+
+    - Bucketing:
+        // Blog Post
+        {
+            _id: 1,
+            title: "An awesome blog",
+            text: "This is an awesome blog we have just started"
+        }
+        // Comment documents with Foreign Keys split to multiple Bucketing
+        {
+            blog_entry_id: 1,
+            page: 1,
+            count: 50,
+            comments: [{
+                name: "Peter Critic",
+                comment: "Awesome blog post"
+            }, ...]
+        },
+        {
+            blog_entry_id: 1,
+            page: 2,
+            count: 1,
+            comments: [{
+                name: "John Page",
+                comment: "Not so awesome blog"
+            }]
+        }
+
+---------------------------------------------------------------------------------------
+    Many-To-Many (N:M)
+---------------------------------------------------------------------------------------
++ An N:M relationship is an example of a relationship between two entities where they 
+both might have many relationships between each other.
+
++ EX: A Book that was written by many Authors. At the same time an Author might have
+written many Books.
+    // Author collection
+    {
+        _id: 1,
+        name: "Peter Standford",
+        books: [1, 2]
+    },
+    {
+        _id: 2,
+        name: "Georg Peterson",
+        books: [2]
+    }
+    // Book collection
+    {
+        _id: 1,
+        title: "A tale of two people",
+        categories: ["drama"],
+        authors: [1, 2]
+    },
+    {
+        _id: 2,
+        title: "A tale of two space ships",
+        categories: ["scifi"],
+        authors: [1]
+    }

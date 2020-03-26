@@ -1,36 +1,22 @@
 const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate");
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
     default: ""
   },
-  model: {
-    type: String,
-    default: ""
+  price: {
+    type: Number,
+    default: 0
   },
-  featured: {
+  description: {
     type: Boolean,
     default: false
   },
   category: {
     type: String,
     default: ""
-  },
-  path: {
-    type: String,
-    default: ""
-  },
-  info: [
-    {
-      title: String,
-      body: String
-    }
-  ],
-  price: {
-    type: Number,
-    default: 0
   },
   images: [
     {

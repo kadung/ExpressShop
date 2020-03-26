@@ -1,16 +1,11 @@
 import React from 'react';
 import StorefrontLayout from '../layout'
+import ProductList from '../components/products/product-list';
 
 const storeforntPage = (props) => {
   return (
-      <StorefrontLayout>
-        <div>
-          Hello {props.name}, this is frontstore
-        </div>
-        
-        <div class="alert alert-primary" role="alert">
-          A simple primary alert—check it out!
-        </div>
+      <StorefrontLayout categories={props.categories}>
+          <ProductList />
       </StorefrontLayout>
   )
 }
