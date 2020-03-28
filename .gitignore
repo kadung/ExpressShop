@@ -1,6 +1,5 @@
 #mongo_dev
-mongodb/diagnostic.data/
-mongodb/journal/
+mongodb/
 
 # Logs
 logs

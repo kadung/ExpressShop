@@ -9,7 +9,11 @@ mongoose.connect(mongoAddress, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-Categories.insertMany(CategoriesData, (err) => {
+Promise.all([
+    Categories.insertMany(CategoriesData)
+]).then((err) => {
     console.error(err);
     db.close();
-})
+});
+
+

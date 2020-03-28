@@ -53,4 +53,4 @@ Ref:
     - Linux:
         mongod --noauth --dbpath "./mongodb"
     - Windows:
-        "/mongod.exe" --noauth --dbpath "./mongodb"
+        "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --noauth --dbpath "./mongodb"
