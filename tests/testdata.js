@@ -10,9 +10,10 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 Promise.all([
+    db.dropDatabase(),
     Categories.insertMany(CategoriesData)
-]).then((err) => {
-    console.error(err);
+]).then((docs) => {
+    console.error(docs);
     db.close();
 });
 

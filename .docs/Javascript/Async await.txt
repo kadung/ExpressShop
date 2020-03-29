@@ -17,7 +17,7 @@ Ref:
 
 
 --------------------------------------------------------------------------------------
-    async keyword
+    await keyword
 -------------------------------------------------------------------------------------- 
 - The keyword await makes JavaScript wait until that promise settles and returns its 
 result. And it works only inside async functions.

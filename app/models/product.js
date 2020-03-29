@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const productSchema = new mongoose.Schema({
+  code: {
+    type: String,
+    default: ""
+  },
   name: {
     type: String,
     default: ""
@@ -38,10 +42,8 @@ const productSchema = new mongoose.Schema({
       ]
     }
   ],
-  metaDescription: {
-    type: String,
-    default: ""
-  }
+  stock: Number,
+  allowPublish: Boolean
 });
 
 productSchema.plugin(mongoosePaginate);
