@@ -1,8 +1,26 @@
 [
     {
-        "name": "T-shirt"
+        "name": "shirt"
     },
     {
-        "name": "Jeans"
+        "name": "backpack"
+    },
+    {
+        "name": "organic"
+    },
+    {
+        "name": "pullover"
+    },
+    {
+        "name": "boot"
+    },
+    {
+        "name": "leather"
+    },
+    {
+        "name": "cap"
+    },
+    {
+        "name": "jacket"
     }
 ]

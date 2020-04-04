@@ -1,0 +1,33 @@
+Ref:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators
+
+--------------------------------------------------------------------------------------
+    Truthy and Falsy
+--------------------------------------------------------------------------------------
+- All values in JavaScript are truthy unless they are defined as falsy.
+
+- Falsy values in JavaScript:
+    if (false)
+    if (null)
+    if (undefined)
+    if (0)
+    if (-0)
+    if (0n)
+    if (NaN)
+    if ("")
+    if ("")
+    if ("")
+    
+
+--------------------------------------------------------------------------------------
+    Short circuit
+--------------------------------------------------------------------------------------
+- Logical AND (&&) syntax: expr1 && expr2
+If expr1 can be converted to true, returns expr2; else, returns expr1.
+    a1 = 'Cat' && 'Dog'      // returns "Dog"
+    a2 = false && 'Cat'      // returns false
+
+- Logical OR (||) syntax: expr1 || expr2
+If expr1 can be converted to true, returns expr1; else, returns expr2.
+    o1 = 'Cat' || 'Dog'      // returns "Cat"
+    o2 = false || 'Cat'      // returns "Cat"

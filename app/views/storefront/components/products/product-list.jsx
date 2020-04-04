@@ -1,17 +1,18 @@
 import React from 'react';
 import ProductCard from './product-cards';
 
-const ProductList = () => {
+const ProductList = (props) => {
+    const products = props.products.map(product => 
+        <ProductCard
+            product={product}
+            key={product._id}
+        /> 
+    )
     return (
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+        <div className="album py-5 bg-light">
+            <div className="container">
+                <div className="row">
+                    {products}                                
                 </div>
             </div>
         </div>

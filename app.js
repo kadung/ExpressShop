@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // express routes
-app.use('/', require('./app/routes/storefront'));
+app.use('/', require('./app/routes/index-routes'));
 
 
 // catch 404 and forward to error handler
