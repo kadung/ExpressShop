@@ -7,10 +7,12 @@ const ProductList = (props) => {
             product={product}
             key={product._id}
         /> 
-    )
+    );
+
     return (
         <div className="album py-5 bg-light">
             <div className="container">
+                {props.search && <h3>Search result: Dung</h3>}
                 <div className="row">
                     {products}                                
                 </div>

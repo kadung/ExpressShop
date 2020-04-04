@@ -14,7 +14,7 @@ const LogoNavbar = () => {
             <div className="navbar-collapse collapse w-100" id="collapsingNavbar">
                 <form className="form-inline justify-content-center" action="/search" method="get">
                     <div className="input-group">
-                        <input type="text" name="searchText" className="form-control" placeholder="Search" />
+                        <input type="text" name="q" className="form-control" placeholder="Search" />
                         <div className="input-group-append">
                             <button className="btn btn-secondary" type="submit">
                                 Search

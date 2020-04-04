@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const storefrontRoutes = require('./storefront');
-const adminRoutes = require('./admin');
+const storefrontRoutes = require('./storefront/index');
+const adminRoutes = require('./admin/index');
 
 /* Storefront */
 router.use("/", storefrontRoutes);

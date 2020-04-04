@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "mongolin": "mongod --noauth --dbpath './mongodb'",
-    "mongowin": "mongod --noauth --dbpath"
+    "mongowin": "mongod --noauth"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

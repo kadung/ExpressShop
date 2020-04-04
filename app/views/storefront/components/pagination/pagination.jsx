@@ -5,7 +5,7 @@ const Pagination = (props) => {
         <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
               <li className={"page-item " + (props.prevPage ? "" : "disabled" )}>
-                <a className="page-link" href={props.baseUrl + props.prevPage}>
+                <a className="page-link" href={props.baseUrl + "?page=" + props.prevPage}>
                     Previous
                 </a>
               </li>
@@ -17,7 +17,7 @@ const Pagination = (props) => {
               </li>
 
               <li className={"page-item " + (props.nextPage ? "" : "disabled" )}>
-                <a className="page-link" href={props.baseUrl + props.nextPage}>
+                <a className="page-link" href={props.baseUrl + "?page=" + props.nextPage}>
                     Next
                 </a>
               </li>
