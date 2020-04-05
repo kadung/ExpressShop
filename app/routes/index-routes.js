@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const storefrontRoutes = require('./storefront/index');
+const productRoutes = require('./storefront/product');
 const adminRoutes = require('./admin/index');
 
 /* Storefront */
-router.use("/", storefrontRoutes);
+router.use("/", productRoutes);
 
 /* Admin */
 router.use("/admin/", adminRoutes);

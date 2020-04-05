@@ -30,7 +30,7 @@ exports.productList = (req, res, next) => {
     ])
     .then(([categories, products]) => {
         res.render(
-            'storefront/pages/index',
+            'storefront/pages/product-list',
             { 
                 categories: categories,
                 products: products,
@@ -62,7 +62,7 @@ exports.productCategory = async (req, res, next) => {
         )
 
         res.render(
-            'storefront/pages/index',
+            'storefront/pages/product-list',
             { 
                 categories: categories,
                 products: products,
@@ -72,5 +72,26 @@ exports.productCategory = async (req, res, next) => {
     }
     catch(err){
         console.log(err)
+    };
+}
+
+exports.productDetail = async (req, res, next) => {
+    try {
+        const categories = await Category.find({});
+        const product = await Product.find({ name: req.params.name });
+        const relative = await Product.find({ categories: { $in: product.categories} })
+            .sort({x:-1})   // Sort the newest
+            .limit(5);      // Get 5 record only
+
+        res.render(
+            'storefront/pages/product-detail',
+            {
+                categories: categories,
+                product: product,
+                relative: relative
+            }
+        )
+    } catch(err) {
+        console.log(err);
     };
 }

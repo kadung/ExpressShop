@@ -7,16 +7,13 @@
     kill [pid_number]
 
 
-+ To do
-        Items                   Staus
-    Storefront model            Done
-	Storefront test data        
-	Storefront UI
-	Cart/Checkout model
-    Cart/Checkout UI
-    Administration schema
-    Administration test data
-    Administration UI
++ To do:
+    - Product detail page
+    - Cart page
+    - Checkout page
+    - Login page
+    - Admin page
+
 
 Ref:
 	- https://github.com/AdamRisberg/react-express-cart

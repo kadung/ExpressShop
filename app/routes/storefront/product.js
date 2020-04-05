@@ -8,7 +8,7 @@ const productController = require('../../controllers/storefront/product')
 router.get("/", productController.productList);
 
 /* Product Detail */
-router.get('/product/:id');
+router.get('/product/:name', productController.productDetail);
 
 /* Product Search */
 router.get('/search', productController.productList);
