@@ -1,9 +1,19 @@
 import React from 'react';
+import ProductCard from './product-cards';
 
 const ProductRelate = (props) => {
+    const products = props.relatedProduct.map(product => 
+        <ProductCard
+            product={product}
+            key={product._id}
+        /> 
+    );
     return(
-        <div>
-            This is relative part
+        <div className="pt-1">
+            <strong>Related products</strong>
+            <div className="row" height="200">
+                {products}
+            </div>
         </div>
     );
 }

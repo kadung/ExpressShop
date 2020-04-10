@@ -11,10 +11,10 @@ const ProductList = (props) => {
 
     return (
         <div className="album py-5 bg-light">
-            <div className="container">
-                {props.search && <h3>Search result: Dung</h3>}
+            <div className="container-fluid">
+                {props.search && <h3>Search result for {props.search}:</h3>}
                 <div className="row">
-                    {products}                                
+                    {products.length ? products : "No matched product"}
                 </div>
             </div>
         </div>

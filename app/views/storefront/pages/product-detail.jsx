@@ -6,9 +6,9 @@ import ProductRelate from '../components/products/product-relate';
 const storeforntPage = (props) => {
   return (
       <StorefrontLayout categories={props.categories}>
-          <div className="container">
+          <div className="container pt-5">
             <ProductData product={props.product}/>
-            <ProductRelate relative={props.props}/>
+            <ProductRelate relatedProduct={props.relatedProduct}/>
           </div>
       </StorefrontLayout>
   )

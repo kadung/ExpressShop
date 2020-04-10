@@ -6,24 +6,25 @@ const ProductCard = (props) => {
     const imageAlt = props.product.images.length && props.product.images[0].alt;
     return (
         <div className="col-md-4">
-            <div className="card mb-4 shadow-sm">
+            <div className="card mb-4">
                 <a href={productLink}>
-                    <img src={imageSrc} 
-                      alt={imageAlt} 
-                      className="img-thumbnail" />
+                    <img src={imageSrc} alt={imageAlt} className="card-img-top" />
                 </a>
-                
                 <div className="card-body">
                     <a href={productLink}>
-                        <p className="card-text text-center">{props.product.name}</p>
-                        <p className="card-text text-center">{props.product.price + " VND"}</p>
+                        <div className="text-center text-dark">
+                            <div className="card-text">{props.product.name}</div>
+                            <div className="card-text">{props.product.price + " VND"}</div>
+                        </div>
                     </a>
-                    <div className="row justify-content-center">
-                        <button type="button" 
-                          className="btn btn-primary" 
-                          disabled={!props.product.stock}>
-                            {props.product.stock ? "Add to Cart" : "Out of Stock"}
-                        </button>
+                    <div className="row justify-content-center pt-1">
+                        <form action={productLink} method="get">
+                            <button type="submit" 
+                              className="btn btn-sm btn-primary" 
+                              disabled={!props.product.stock}>
+                                {props.product.stock ? "Add to Cart" : "Out of Stock"}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

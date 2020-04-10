@@ -9,6 +9,14 @@
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
                 "alt": "trulli"
+            },
+            {
+                "src": "https://sudospaces.com/vietchem-com-vn/2018/08/3.jpg",
+                "alt": "machine"
+            },
+            {
+                "src": "https://sudospaces.com/vietchem-com-vn/2018/08/3.jpg",
+                "alt": "banner"
             }
         ],
         "options": {
@@ -18,7 +26,7 @@
                 "L",
                 "XL"
             ],
-            "colours": [
+            "colors": [
                 "Harvest",
                 "Navy"
             ]
@@ -33,12 +41,12 @@
         "categories": ["cap"],
         "images": [
             {
-                "src": "https://www.w3schools.com/html/pic_trulli.jpg",
+                "src": "https://sudospaces.com/vietchem-com-vn/2018/08/3.jpg",
                 "alt": "trulli"
             }
         ],
         "options": {
-            "colour": [
+            "colors": [
                 "Heather green",
                 "Burnt orange",
                 "Slate grey",
@@ -56,11 +64,11 @@
         "images": [
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
-                "alt": "trulli"
+                "alt": "big image"
             }
         ],
         "options": {
-            "size": [
+            "sizes": [
                 "7.5",
                 "8",
                 "8.5",
@@ -82,11 +90,11 @@
         "images": [
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
-                "alt": "trulli"
+                "alt": "small image"
             }
         ],
         "options": {
-            "size": [
+            "sizes": [
                 "S",
                 "M",
                 "L",
@@ -104,11 +112,11 @@
         "images": [
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
-                "alt": "trulli"
+                "alt": "extremly big"
             }
         ],
         "options": {
-            "colour": [
+            "colors": [
                 "Navy",
                 "Moss",
                 "Nutmeg",
@@ -126,7 +134,7 @@
         "images": [
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
-                "alt": "trulli"
+                "alt": "width image"
             }
         ],
         "options": {},
@@ -141,7 +149,7 @@
         "images": [
             {
                 "src": "https://www.w3schools.com/html/pic_trulli.jpg",
-                "alt": "trulli"
+                "alt": "height image"
             }
         ],
         "options": {},
@@ -220,7 +228,7 @@
             }
         ],
         "options": {
-            "size": [
+            "sizes": [
                 "S",
                 "M",
                 "L"
@@ -241,7 +249,7 @@
             }
         ],
         "options": {
-            "size": [
+            "sizes": [
                 "M",
                 "L"
             ]

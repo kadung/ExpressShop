@@ -36,8 +36,8 @@ const productSchema = new Schema({
   ],
   options: {
     type: {
-      size: [String],
-      color: [String]
+      sizes: [String],
+      colors: [String]
     },
     default: {}
   },

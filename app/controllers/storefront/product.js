@@ -30,7 +30,7 @@ exports.productList = (req, res, next) => {
     ])
     .then(([categories, products]) => {
         res.render(
-            'storefront/pages/product-list',
+            'storefront/pages/products',
             { 
                 categories: categories,
                 products: products,
@@ -39,7 +39,7 @@ exports.productList = (req, res, next) => {
             }
         );
     })
-    .catch(console.log);
+    .catch(next);
 }
 
 /* Product Category controller */
@@ -62,7 +62,7 @@ exports.productCategory = async (req, res, next) => {
         )
 
         res.render(
-            'storefront/pages/product-list',
+            'storefront/pages/products',
             { 
                 categories: categories,
                 products: products,
@@ -71,27 +71,36 @@ exports.productCategory = async (req, res, next) => {
         );
     }
     catch(err){
-        console.log(err)
+        return next(err)
     };
 }
 
 exports.productDetail = async (req, res, next) => {
     try {
         const categories = await Category.find({});
-        const product = await Product.find({ name: req.params.name });
-        const relative = await Product.find({ categories: { $in: product.categories} })
+        const product = await Product.findOne({ name: req.params.name });
+        const relatedProduct = await Product.find({ categories: { $in: product.categories} })
             .sort({x:-1})   // Sort the newest
             .limit(5);      // Get 5 record only
-
+        
         res.render(
             'storefront/pages/product-detail',
             {
                 categories: categories,
                 product: product,
-                relative: relative
+                relatedProduct: relatedProduct
             }
         )
     } catch(err) {
-        console.log(err);
+        return next(err)
     };
+}
+
+exports.addToCart = (req, res, next) => {
+    res.send({
+        message: "Cart successfully updated",
+        cartId: "6872af8ee9e289f7e2513a39741cd3f58717f74e",
+        totalCartItems: 2
+    });
+    
 }

@@ -10,13 +10,15 @@ const storeforntPage = (props) => {
             products={props.products.docs}
             search={props.search} 
           />
-          <Pagination 
-            totalPages={props.products.totalPages}
-            currentPage={props.products.page}
-            prevPage={props.products.prevPage}
-            nextPage={props.products.nextPage}
-            baseUrl={props.baseUrl}
-          />
+          {
+            (props.products.totalPages==1) && <Pagination 
+              totalPages={props.products.totalPages}
+              currentPage={props.products.page}
+              prevPage={props.products.prevPage}
+              nextPage={props.products.nextPage}
+              baseUrl={props.baseUrl}/>
+          }
+          
       </StorefrontLayout>
   )
 }
