@@ -67,8 +67,11 @@ const ProductData = (props) => {
                         </form>
 
                         <div>
-                            <h2  id="demot">Let AJAX change this text</h2>
-                            <button type="button" id="demob">Change Content</button>
+                            <p>If you click on the "Hide" button, I will disappear.</p>
+
+                            <button id="hide" onClick={myFunction()}>Hide</button>
+                            <button id="show">Show</button>
+                           
                         </div>
 
                     </div>
