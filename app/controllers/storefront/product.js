@@ -82,7 +82,7 @@ exports.productDetail = async (req, res, next) => {
         const relatedProduct = await Product.find({ categories: { $in: product.categories} })
             .sort({x:-1})   // Sort the newest
             .limit(5);      // Get 5 record only
-        
+           
         res.render(
             'storefront/pages/product-detail',
             {
@@ -97,6 +97,7 @@ exports.productDetail = async (req, res, next) => {
 }
 
 exports.addToCart = (req, res, next) => {
+    
     res.send({
         message: "Cart successfully updated",
         cartId: "6872af8ee9e289f7e2513a39741cd3f58717f74e",

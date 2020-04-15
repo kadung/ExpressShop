@@ -3,6 +3,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 let app = express();
 
@@ -24,6 +26,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'handsome',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: db })
+}));
 
 // express routes
 app.use('/', require('./app/routes/index'));

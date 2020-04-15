@@ -11,7 +11,7 @@ const ProductRelate = (props) => {
     return(
         <div className="pt-1">
             <strong>Related products</strong>
-            <div className="row" height="200">
+            <div className="row" height="100">
                 {products}
             </div>
         </div>

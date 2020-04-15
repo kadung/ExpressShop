@@ -45,7 +45,7 @@ const ProductData = (props) => {
                     <h3 className="col-md-10">{props.product.name}</h3>
                     <h5 className="col-md-10">{props.product.price + " VND"}</h5>
                     <div className="col-md-8 pt-3 ">
-                        <form action="/product/addToCart" method="post">
+                        <form id="addToCart">
                             {selectColour}
                             {selectSize}
                             <div className="form-group">
@@ -64,16 +64,8 @@ const ProductData = (props) => {
                                     {props.product.stock ? "Add to Cart" : "Out of Stock"}
                                 </button>
                             </div>
+                            <input type="hidden" name="productId" value={props.product._id}></input>
                         </form>
-
-                        <div>
-                            <p>If you click on the "Hide" button, I will disappear.</p>
-
-                            <button id="hide" onClick={myFunction()}>Hide</button>
-                            <button id="show">Show</button>
-                           
-                        </div>
-
                     </div>
                 </div>
             </div>
