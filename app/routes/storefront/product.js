@@ -8,7 +8,6 @@ router.get("/", productController.productList);
 
 /* Product Detail */
 router.get('/product/:name', productController.productDetail);
-router.post('/product/addToCart', productController.addToCart);
 
 /* Product Search */
 router.get('/search', productController.productList);

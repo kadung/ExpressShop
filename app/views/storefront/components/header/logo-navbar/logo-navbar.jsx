@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogoNavbar = () => {
+const LogoNavbar = (props) => {
     return (
         <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" className="navbar-brand d-flex w-50 mr-auto">
@@ -31,7 +31,7 @@ const LogoNavbar = () => {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            Cart
+                            Cart <span class="badge badge-primary" id="cartBadge">{props.cartNum}</span>
                         </a>
                     </li>
                 </ul>

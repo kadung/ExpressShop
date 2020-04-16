@@ -64,7 +64,9 @@ const ProductData = (props) => {
                                     {props.product.stock ? "Add to Cart" : "Out of Stock"}
                                 </button>
                             </div>
-                            <input type="hidden" name="productId" value={props.product._id}></input>
+                            <input type="hidden" name="productId" value={props.product._id} />
+                            <input type="hidden" name="productName" value={props.product.name} />
+                            <input type="hidden" name="productPrice" value={props.product.price} />
                         </form>
                     </div>
                 </div>

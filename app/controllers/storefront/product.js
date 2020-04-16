@@ -35,7 +35,8 @@ exports.productList = (req, res, next) => {
                 categories: categories,
                 products: products,
                 baseUrl: req.path,
-                search: req.query.q
+                search: req.query.q,
+                cartNum: req.session.cart && req.session.cart.length || 0
             }
         );
     })
@@ -66,7 +67,8 @@ exports.productCategory = async (req, res, next) => {
             { 
                 categories: categories,
                 products: products,
-                baseUrl: req.path
+                baseUrl: req.path,
+                cartNum: req.session.cart && req.session.cart.length || 0
             }
         );
     }
@@ -88,20 +90,11 @@ exports.productDetail = async (req, res, next) => {
             {
                 categories: categories,
                 product: product,
-                relatedProduct: relatedProduct
+                relatedProduct: relatedProduct,
+                cartNum: req.session.cart && req.session.cart.length || 0
             }
         )
     } catch(err) {
         return next(err)
     };
-}
-
-exports.addToCart = (req, res, next) => {
-    
-    res.send({
-        message: "Cart successfully updated",
-        cartId: "6872af8ee9e289f7e2513a39741cd3f58717f74e",
-        totalCartItems: 2
-    });
-    
 }

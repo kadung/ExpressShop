@@ -5,13 +5,13 @@ import Pagination from '../components/pagination/pagination'
 
 const storeforntPage = (props) => {
   return (
-      <StorefrontLayout categories={props.categories}>
+      <StorefrontLayout categories={props.categories} cartNum={props.cartNum}>
           <ProductList 
             products={props.products.docs}
             search={props.search} 
           />
           {
-            (props.products.totalPages==1) && <Pagination 
+            (props.products.totalPages==1) || <Pagination 
               totalPages={props.products.totalPages}
               currentPage={props.products.page}
               prevPage={props.products.prevPage}

@@ -1,8 +1,5 @@
-var express = require('express');
-var router = express.Router();
-
-/* View cart */
-router.get("/cart" );
+const express = require('express');
+const router = express.Router();
 
 /* Shiping */
 router.get("/shiping" );

@@ -5,7 +5,7 @@ import CatNavBar from './category-navbar/category-navbar';
 const Header = (props) => {
     return (
         <div id='header'>
-            <LogoNavbar />
+            <LogoNavbar cartNum={props.cartNum} />
             <CatNavBar categories={props.categories} />
         </div>
     );

@@ -20,7 +20,7 @@ const StoreforntLayout = (props) => {
           <link rel = "icon" href = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" type = "image/x-icon" /> 
         </head>
         
-        <Header categories={props.categories} />     
+        <Header categories={props.categories} cartNum={props.cartNum} />     
         
         <div id="body">
           {props.children}

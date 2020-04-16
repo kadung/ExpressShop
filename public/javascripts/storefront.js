@@ -4,11 +4,11 @@ $(document).ready(function(){
     
     $.ajax({
       type: "POST",
-      url: "/product/addToCart",
+      url: "/cart/add",
       data: $("#addToCart").serialize(),
-      success: (data, status) => {
-        console.log(data);
-        console.log("\nStatus: " + status);
+      success: (data) => {
+        $("#cartBadge").text(data.totalCartItems);
+        alert(data.message)
       },
       dataType: 'json'
     });
