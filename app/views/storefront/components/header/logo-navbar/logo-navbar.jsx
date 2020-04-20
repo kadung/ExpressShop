@@ -29,9 +29,9 @@ const LogoNavbar = (props) => {
                             Login
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            Cart <span class="badge badge-primary" id="cartBadge">{props.cartNum}</span>
+                    <li>
+                        <a href="/cart" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">
+                            Cart <span class="badge badge-light" id="cartBadge">{props.cartNum}</span>
                         </a>
                     </li>
                 </ul>
