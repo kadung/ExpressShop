@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 const Category = require('../../models/category');
 
 exports.get = async (req, res, next) => {
@@ -29,6 +31,7 @@ exports.get = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     let existItem = false;
     let newItem = {
+        cartId: mongoose.Types.ObjectId(),
         productId: req.body.productId,
         productName: req.body.productName,
         productImageUrl: "",
@@ -53,11 +56,27 @@ exports.add = async (req, res, next) => {
         req.session.cart.push(newItem);
     }
 
-    console.log(req.session.cart)
-
     res.send({
         message: "Cart successfully updated",
         totalCartItems: req.session.cart.length
-    });
-    
+    });   
+}
+
+exports.delete = (req, res, next) => {
+    if (!req.session.cart){
+        return res.sendStatus(404);
+    }
+
+    const deleteCartId = req.query.cartId;
+    const deleteItemIndex = req.session.cart.findIndex((item) => {
+        return item.cartId == deleteCartId;
+    })
+
+    req.session.cart.splice(deleteItemIndex, 1);
+
+    console.log(req.session.cart)
+
+    res.send({
+        cartData: req.session.cart 
+    });  
 }

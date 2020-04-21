@@ -30,8 +30,8 @@ const LogoNavbar = (props) => {
                         </a>
                     </li>
                     <li>
-                        <a href="/cart" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">
-                            Cart <span class="badge badge-light" id="cartBadge">{props.cartNum}</span>
+                        <a href="/cart" className="btn btn-primary btn-sm active" role="button" aria-pressed="true">
+                            Cart <span className="badge badge-light" id="cartBadge">{props.cartNum}</span>
                         </a>
                     </li>
                 </ul>

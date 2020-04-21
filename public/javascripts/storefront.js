@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $("#addToCart").submit(event => {
-    event.preventDefault();
+    event.preventDefault();   // Prevent form send data
     
     $.ajax({
       type: "POST",
@@ -13,4 +13,16 @@ $(document).ready(function(){
       dataType: 'json'
     });
   });
+
+  $("#deleteCartItem").click(event => {
+    console.log();
+    $.ajax({
+      type: "DELETE",
+      url: "/cart/delete?cartId=" + $("#deleteCartItem").attr("cartid"),
+      success: (data) => {
+        console.log(data.cartData);
+      },
+      dataType: 'json'
+    });
+  })
 });
