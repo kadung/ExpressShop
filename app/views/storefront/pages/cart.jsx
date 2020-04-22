@@ -6,18 +6,18 @@ const Cart = (props) => {
     if(props.cartData.length){
         cartItems = props.cartData.map((item, index) => {
             return (
-                <div>
+                <div id={item.cartId}>
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-2 text-center">
                                 <img className="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80" />
                         </div>
-                        <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <div className="col-12 col-sm-12 col-md-6 text-sm-center text-lg-left">
                             <h4 className="product-name"><strong>{item.productName}</strong></h4>
                             <small>{item.color ? `Color: ${item.color}` : ""}</small>
                             &nbsp;&nbsp;&nbsp;
                             <small>{item.size ? `Size: ${item.size}` : ""}</small>
                         </div>
-                        <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                        <div className="col-12 col-sm-12 col-md-4 text-sm-center text-md-right row">
                             <div className="col-3 col-sm-3 col-md-6 text-md-right pt-2">
                                 <h6><strong>{item.price} <span className="text-muted">x</span></strong></h6>
                             </div>
@@ -54,21 +54,18 @@ const Cart = (props) => {
                         {
                             props.cartData.length ? cartItems : <p>There is no product in your cart.</p>
                         }
-                            
-                        <div className="pull-right">
-                            <a href="" className="btn btn-outline-secondary pull-right">
-                                Update shopping cart
-                            </a>
-                        </div>
+
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                Coupon
+                            </div>
+                            <div>
+                                Total price: <b id="cartTotal">{" " + props.cartTotal + " VND"}</b>
+                            </div>
+                        </div>  
                     </div>
                     <div className="card-footer">
-                        <div className="coupon col-md-5 col-sm-5 no-padding-left pull-left pt-2">
-                            <div className="row">
-                            Total price 
-                            : <b>{props.cartTotal + " VND"}</b>
-                            </div>
-                        </div>
-                        <div className="pull-right">
+                        <div className="text-right">
                             <a href="" className="btn btn-success pull-right">Checkout</a>
                         </div>
                     </div>

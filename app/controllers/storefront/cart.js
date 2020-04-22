@@ -5,14 +5,14 @@ const Category = require('../../models/category');
 exports.get = async (req, res, next) => {
     let cartNum = 0;
     let cartData = [];
-    let total = 0;
+    let cartTotal = 0;
     const categories = await Category.find();
 
     if (req.session.cart){
         cartData = req.session.cart
         cartNum = cartData.length;
         cartData.forEach(element => {
-            total += element.price * element.quantity;
+            cartTotal += element.price * element.quantity;
         });
         
     } 
@@ -23,7 +23,7 @@ exports.get = async (req, res, next) => {
             categories: categories,
             cartNum: cartNum,
             cartData: cartData,
-            cartTotal: total
+            cartTotal: cartTotal
         }
     )
 }
@@ -63,6 +63,8 @@ exports.add = async (req, res, next) => {
 }
 
 exports.delete = (req, res, next) => {
+    let cartTotal = 0;
+
     if (!req.session.cart){
         return res.sendStatus(404);
     }
@@ -74,9 +76,16 @@ exports.delete = (req, res, next) => {
 
     req.session.cart.splice(deleteItemIndex, 1);
 
-    console.log(req.session.cart)
+    if(req.session.cart.length) {
+        req.session.cart.forEach(element => {
+            cartTotal += element.price * element.quantity;
+        });
+    }
+    
 
     res.send({
-        cartData: req.session.cart 
+        success: true,
+        totalCartItems: req.session.cart.length,
+        cartTotal: cartTotal
     });  
 }

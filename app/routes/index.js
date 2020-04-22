@@ -3,7 +3,7 @@ const router = express.Router();
 
 const productRoutes = require('./storefront/product');
 const cartRoutes = require('./storefront/cart');
-const adminRoutes = require('./admin/index');
+const adminRoutes = require('./admin/admin');
 
 /* Storefront */
 router.use("/", productRoutes);
