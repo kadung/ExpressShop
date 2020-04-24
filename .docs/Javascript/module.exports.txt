@@ -49,10 +49,14 @@ be aware of module.exports.*.
 ======================================================================================
     ES6
 ======================================================================================
-    CommonJS           |   ES6
-    --------------------------------------
-    require            |   import
-    modudule.exports   |   export
+    CommonJS                    |       ES6
+    -----------------------------------------------
+    require('./test')           =   import * from './test'
+    exports.var_name            =   export const var_name
+    module.exports = {          =   export default {
+        red: { /* ... */ },             red: { /* ... */ },
+        blue: { /* ... */ }             blue: { /* ... */ }
+    };                              };
 
 + export: a file can have multiple exported name.
     export const MyComponent = () => {}

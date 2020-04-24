@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-
-exports.login = (req, res, next) => {
-    res.render('common/login')
+exports.home = (req, res, next) => {
+    res.render('admin/home')
 }

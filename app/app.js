@@ -3,8 +3,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
+const adminModel = require('./models/admin');
+
+const sessionMw = require('./middlewares/session');
+// const passportMw = require('./middlewares/passport');
 
 let app = express();
 
@@ -16,7 +19,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine
-app.set('views', __dirname + '/app/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 
@@ -25,29 +28,22 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  secret: 'handsome',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 7 * 24 * 60 * 60 * 1000   // 1 week in milisecond
-  },
-  store: new MongoStore({ 
-    mongooseConnection: db,
-    autoRemove: 'interval',
-    autoRemoveInterval: 7 * 24 * 60   // 1 week in minutes
-  })
-}));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(sessionMw.session(db));
+
+app.use(passport.initialize());
+app.use(passport.session());
+/* PASSPORT LOCAL AUTHENTICATION */
+passport.use(adminModel.createStrategy());
+
+passport.serializeUser(adminModel.serializeUser());
+passport.deserializeUser(adminModel.deserializeUser());
 
 // express routes
-app.use('/', require('./app/routes/index'));
+app.use('/', require('./routes/index'));
 
-// catch all error
-app.use((err, req, res, next) => {
-  // Forward to error handler depend on error type
-  console.log(err);
-  // 404 error
+// 404 error
+app.use((req, res, next) => {
   res.render('common/page-not-found');
 });
 

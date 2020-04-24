@@ -4,10 +4,12 @@ const _ = require('lodash');
 // Models
 const CategoryModel = require('../app/models/category');
 const ProductModel = require('../app/models/product');
+const AdminModel = require('../app/models/admin');
 
 // Model data
 const CategoriesData = require('./data/categories');
 const ProductsData = require('./data/products');
+const AdminUser = require('./data/admin-user.json');
 
 // Connect MongoDB
 const mongoAddress = 'mongodb://127.0.0.1/shop';
@@ -26,9 +28,8 @@ const insertData = async () => {
         await db.dropDatabase();
         const categories = await CategoryModel.insertMany(CategoriesData);
         replaceProductsCategoryStringToId(categories);
-        const products = await ProductModel.insertMany(ProductsData);
-
-        console.log("Products: " + products);
+        await ProductModel.insertMany(ProductsData);
+        await AdminModel.register(AdminUser, 'admin');
     }
     catch(err) {
         console.log(err);
