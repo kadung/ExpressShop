@@ -4,16 +4,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const adminModel = require('./models/admin');
+const flash = require('connect-flash');
 
-const sessionMw = require('./middlewares/session');
-// const passportMw = require('./middlewares/passport');
+const sessionConfig = require('./configs/session');
+const databaseConfig = require('./configs/database');
+const passportConfig = require('./configs/passport');
 
 let app = express();
 
-// mongodb
-var mongoAddress = 'mongodb://127.0.0.1/shop';
-mongoose.connect(mongoAddress, { useNewUrlParser: true });
+// Mongodb setup
+mongoose.connect(databaseConfig.url, { useNewUrlParser: true });
+
+// Passport setup
+passportConfig(passport);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -29,15 +32,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(sessionMw.session(db));
-
+app.use(sessionConfig.init(db));
 app.use(passport.initialize());
 app.use(passport.session());
-/* PASSPORT LOCAL AUTHENTICATION */
-passport.use(adminModel.createStrategy());
-
-passport.serializeUser(adminModel.serializeUser());
-passport.deserializeUser(adminModel.deserializeUser());
+app.use(flash());
 
 // express routes
 app.use('/', require('./routes/index'));

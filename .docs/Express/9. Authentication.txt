@@ -1,0 +1,56 @@
+Ref:
+    - https://www.sitepoint.com/local-authentication-using-passport-node-js/
+    - https://stackoverflow.com/questions/43452896/authentication-jwt-usage-vs-session
+
+-------------------------------------------------------------------------------------------
+    Authentication Strategies: Server Side Sessions vs JWTs
+-------------------------------------------------------------------------------------------
++ The HTTP is stateless, so in traditional web applications (server side rendering), the
+authentication is using server side sessions which the server responds to a successful
+authentication request by doing two things:
+    - First, it creates a session using some storage mechanism. Each session has its own
+    identifier (usually a long, semi-random string) which is used to retrieve information
+    about the session on future requests.
+    - Secondly, that information is sent to the client by way of headers instructing it to
+    set a cookie. The browser automatically attaches the session ID cookie to all subsequent
+    requests, allowing the server to identify the user by retrieving the appropriate session
+    from storage. 
+
++ Frontend frameworks such as React, Angular, ... are part of a trend towards richer, more
+sophisticated web application clients. As a consequence of this, server-side components are
+unburdened from many of their traditional responsibilities, in essence becoming more like
+API’s.
+
++ APIs should be designed to be truly stateless. This means no login or logout methods and
+no sessions. API designers can’t rely on cookies either, as there is no guarantee that
+requests will be made via a web browser. Clearly, we need an alternative mechanism and the
+simplist solution is JSON Web Tokens (JWT or JWTs).
+
++ JWTs are a draft specification, although in essence they are really just a more concrete
+implementation of an authentication and authorization mechanism that is exchanging tokens.
+
++ Instead of supplying credentials such as a username and password with every request, we
+can allow the client to exchange valid credentials for a token. This token gives the client
+access to resources on the server. Tokens are generally much longer and more obfuscated
+than a password. For example, the JWTs are on the order of ~150 characters. Once the token
+is obtained, it must be sent with every API call.
+
+
+-------------------------------------------------------------------------------------------
+    Cookies
+-------------------------------------------------------------------------------------------
++
+
++ Cookies have an expiration date implicitly or explicitly set which controls how long they
+last (subject to the user agent actually enforcing it). A cookie may persist only for the
+duration of the session (or an even shorter period).
+    
++ If a cookie is valid, it will be passed along with the HTTP request to the domain that it
+originated from. Only the domain that set the cookie can read the cookie (though there are
+ways to exploit this, such as cross-site scripting).
+
++ If you want a cookie to expire at a specific time, set an expiration date on it using the
+client or server-side language of your choice.
+
++ If you want the cookie to expire when the session ends (close browser), then don't set an
+expiration date.

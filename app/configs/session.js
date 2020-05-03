@@ -1,7 +1,7 @@
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-exports.session = (db) => {
+exports.init = (db) => {
   return session({
     secret: 'handsome',
     resave: false,
