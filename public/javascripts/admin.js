@@ -8,7 +8,7 @@ $(document).ready(function(){
           data: $("#loginForm").serialize(),
           success: (data) => {
             if (data.success) {
-              window.location.replace("/admin/home");
+              window.location.replace("/admin/dashboard");
             } else {
               $('#errorLogin').removeClass('hide');
             }
