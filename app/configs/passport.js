@@ -8,31 +8,35 @@ module.exports = (passport) => {
     });
 
     passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
+        AdminModel.findById(id, function (err, user) {
             done(err, user);
         });
     });
 
-    /* Passport local */
+    /* Passport local */    
     passport.use(
-        'local-login',
         new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true
         },
-        function (req, email, password, done) { 
+        function (req, email, password, done) {
             AdminModel.findOne(
-                {'local.email': email},
+                {'email': email},
                 (err, user) => {
-                    if (err)
-                        return done(err);
-                    // User is not found, return the message
+                    /* 
+                        Anything return in done method will transmit to passport.authenticate callback
+                        EX:  return done(a,b)  ==> passport.authenticate(strategy, (a,b) => {})
+                    */
+                    // If any system error
+                    if (err) 
+                        return done(err, null);
+                    // User is not found
                     if (!user)
-                        return done(null, false, req.flash('loginMessage', 'No user found.'));
-                    // User is found but the password is wrong
+                        return done(null, null)
+                    // Password is incorrect
                     if (!user.validPassword(password))
-                        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                        return done(null, null)
                     // All is well
                     return done(null, user);
                 }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const _ = require('lodash'); 
+const database = require('../app/configs/database');
 
 // Models
 const CategoryModel = require('../app/models/category');
@@ -9,11 +10,10 @@ const AdminModel = require('../app/models/admin');
 // Model data
 const CategoriesData = require('./data/categories');
 const ProductsData = require('./data/products');
-const AdminUser = require('./data/admin-user.json');
+const AdminData = require('./data/admin-user.json');
 
 // Connect MongoDB
-const mongoAddress = 'mongodb://127.0.0.1/shop';
-mongoose.connect(mongoAddress, { useNewUrlParser: true });
+mongoose.connect(database.url, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -29,7 +29,8 @@ const insertData = async () => {
         const categories = await CategoryModel.insertMany(CategoriesData);
         replaceProductsCategoryStringToId(categories);
         await ProductModel.insertMany(ProductsData);
-        await AdminModel.register(AdminUser, 'admin');
+        await new AdminModel(AdminData).save();
+
     }
     catch(err) {
         console.log(err);

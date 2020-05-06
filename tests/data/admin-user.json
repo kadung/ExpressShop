@@ -1,7 +1,8 @@
 {
-    "firstname": "admin",
-    "lastname": "dung",
-    "username": "admin",
+    "firstName": "test",
+    "lastName": "admin",
+    "email": "admin@test.com",
+    "password": "test",
     "active": true,
     "allowEdit": true
 }

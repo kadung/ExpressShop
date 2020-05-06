@@ -1,17 +1,23 @@
 const passport = require('passport');
-const bcrypt = require('bcrypt-nodejs');
 
 exports.loginPage = (req, res, next) => {
-    res.render('common/login', {isAdmin: true})
+    res.render(
+      'common/login',
+      { isAdmin: true }
+    )
 }
 
 exports.login = (req, res, next) => {
     passport.authenticate(
-      'local-login',
-      {
-        successRedirect : '/admin/home',
-        failureRedirect : '/login',
-        failureFlash : true
+      'local',
+      (err, user) => {
+        if (err) return next(err);
+        if (!user) 
+          return res.send({ success: false });
+        req.logIn(user, function(err) {
+          if (err) return next(err);
+          return res.send({ success: true });
+        });
       }
-    )
+    )(req,res,next);
 }

@@ -1,0 +1,28 @@
+Ref:
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+-----------------------------------------------------------------------------------------
+    Arrow function
+-----------------------------------------------------------------------------------------
+- An arrow function expression is a compact alternative to a regular function expression,
+although without its own bindings to the "this", "arguments", "super", or "new.target"
+keywords.
+
+- Arrow functions are ill suited as methods, and they cannot be used as constructors.
+
+- Syntax:
+    (param1, param2, …, paramN) => { statements }
+    
+    // equivalent to: (param1, param2, …, paramN) => { return expression; }
+    (param1, param2, …, paramN) => expression 
+    
+    // Default input
+    (param1 = defaultValue1, param2, …, paramN = defaultValueN) => { statements }
+
+    // Parentheses are optional when there's only one parameter name:
+    (singleParam) => { statements }
+    singleParam => { statements }
+
+    // The parameter list for a function with no parameters should be written with a pair
+    // of parentheses.
+    () => { statements }

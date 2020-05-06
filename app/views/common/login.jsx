@@ -9,25 +9,37 @@ const Login = (props) => {
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossOrigin="anonymous" />
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
 
-                {props.isAdmin && <script src="/javascripts/admin.js"/>}
+                {props.isAdmin && <script src="/javascripts/admin.js" />}
                 <link rel="stylesheet" href="/stylesheets/login.css" />
                 
                 <title>Kadung</title>
                 <link rel="icon" href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" type="image/x-icon" /> 
             </head>
-            <body class="text-center">
-                <form class="form-signin" id="loginForm">
-                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <label class="sr-only">User name:</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username" required="" autoFocus=""/>
-                    <label class="sr-only">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required=""/>
-                    <div class="checkbox mb-3">
+            <body className="text-center">
+                <form className="form-signin" id="loginForm">
+                    <div id="errorLogin" className='alert alert-danger hide' role='alert' >
+                        Your username or password is incorrect. Please try again
+                    </div>
+                    <h1 className="h3 mb-3 font-weight-normal">
+                        Please sign in
+                    </h1>
+                    <label className="sr-only">
+                        Email:
+                    </label>
+                    <input type="text" name="email" className="form-control" placeholder="Email" required="" autoFocus=""/>
+                    <label className="sr-only">
+                        Password
+                    </label>
+                    <input type="password" name="password" className="form-control" placeholder="Password" required=""/>
+                    <div className="checkbox mb-3">
                         <label>
-                        <input type="checkbox" value="remember-me"/> Remember me
+                            <input type="checkbox" value="remember-me"/>
+                            Remember me
                         </label>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign in
+                    </button>
                 </form>
             </body>
       </>   

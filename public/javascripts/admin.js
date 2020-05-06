@@ -1,14 +1,17 @@
 $(document).ready(function(){
     $("#loginForm").submit(event => {
         event.preventDefault();   // Prevent form send data
-        var path = window.location.pathname;
-        console.log(window.location.href);
+        
         $.ajax({
           type: "POST",
           url: "/login/admin",
           data: $("#loginForm").serialize(),
           success: (data) => {
-            console.log("success");
+            if (data.success) {
+              window.location.replace("/admin/home");
+            } else {
+              $('#errorLogin').removeClass('hide');
+            }
           },
           dataType: 'json'
         });

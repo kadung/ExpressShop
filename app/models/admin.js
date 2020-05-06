@@ -12,13 +12,18 @@ const adminSchema = new mongoose.Schema({
   allowEdit: { type: Boolean, default: false }
 });
 
-// Create hash
-adminSchema.methods.generateHash = function (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+// Create hash password before save
+adminSchema.pre(
+  'save',
+  function (next) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8), null);
+    next();
+  }
+)
+
 // Valitdate password
 adminSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.local.password);
+  return bcrypt.compareSync(password, this.password);
 };
 
 adminSchema.plugin(mongoosePaginate);
