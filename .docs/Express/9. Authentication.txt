@@ -1,6 +1,7 @@
 Ref:
     - https://www.sitepoint.com/local-authentication-using-passport-node-js/
     - https://stackoverflow.com/questions/43452896/authentication-jwt-usage-vs-session
+    - http://toon.io/understanding-passportjs-authentication-flow/
 
 -------------------------------------------------------------------------------------------
     Authentication Strategies: Server Side Sessions vs JWTs

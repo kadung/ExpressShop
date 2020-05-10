@@ -24,16 +24,22 @@ const LogoNavbar = (props) => {
                 </form>
                 
                 <ul className="nav navbar-nav ml-1 w-50 justify-content-end align-items-center">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            Login
-                        </a>
-                    </li>
                     <li>
                         <a href="/cart" className="btn btn-primary btn-sm active" role="button" aria-pressed="true">
                             Cart <span className="badge badge-light" id="cartBadge">{props.cartNum}</span>
                         </a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href={props.isLogin ? "/logout" : "/login"}>
+                            {props.isLogin ? "Logout" : "Login"} 
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href= {props.isLogin ? "/profile" : "/register"}>
+                            {props.isLogin ? "Profile" : "Register"} 
+                        </a>
+                    </li>
+                    }
                 </ul>
             </div>
         </nav>

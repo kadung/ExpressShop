@@ -23,7 +23,8 @@ exports.get = async (req, res, next) => {
             categories: categories,
             cartNum: cartNum,
             cartData: cartData,
-            cartTotal: cartTotal
+            cartTotal: cartTotal,
+            isLogin: req.session.passport && req.session.passport.user
         }
     )
 }

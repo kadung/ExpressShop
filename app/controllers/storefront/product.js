@@ -1,16 +1,13 @@
 const Category = require('../../models/category');
 const Product = require('../../models/product');
 
+const paginationOptions = require('../../constant/pagination').paginationOptions;
+
 /* Product List controller */
 exports.productList = (req, res, next) => {
     let query = {
         allowPublish: true
     };
-    const paginationOptions = {
-        page: req.query.page || 1,
-        limit: 10,
-        lean: true,
-    }
     
     if(req.query.q){
         query = {
@@ -25,7 +22,10 @@ exports.productList = (req, res, next) => {
         Category.find(),
         Product.paginate(
             query,
-            paginationOptions
+            {
+                ...paginationOptions,
+                page: req.query.page || 1
+            }
         )
     ])
     .then(([categories, products]) => {
@@ -36,7 +36,8 @@ exports.productList = (req, res, next) => {
                 products: products,
                 baseUrl: req.path,
                 search: req.query.q,
-                cartNum: req.session.cart && req.session.cart.length || 0
+                cartNum: req.session.cart && req.session.cart.length || 0,
+                isLogin: req.session.passport && req.session.passport.user
             }
         );
     })
@@ -45,12 +46,6 @@ exports.productList = (req, res, next) => {
 
 /* Product Category controller */
 exports.productCategory = async (req, res, next) => {
-    const productOptions = {
-        page: req.query.page || 1,
-        limit: 10,
-        lean: true,
-    }
-
     try {
         const categories = await Category.find();
         const category = categories.find((item) => {
@@ -59,7 +54,10 @@ exports.productCategory = async (req, res, next) => {
         
         const products = await Product.paginate(
             {categories: {$eq: category._id}},
-            productOptions
+            {
+                ...paginationOptions,
+                page: req.query.page || 1
+            }
         )
 
         res.render(
@@ -68,7 +66,8 @@ exports.productCategory = async (req, res, next) => {
                 categories: categories,
                 products: products,
                 baseUrl: req.path,
-                cartNum: req.session.cart && req.session.cart.length || 0
+                cartNum: req.session.cart && req.session.cart.length || 0,
+                isLogin: req.session.passport && req.session.passport.user
             }
         );
     }
@@ -91,7 +90,8 @@ exports.productDetail = async (req, res, next) => {
                 categories: categories,
                 product: product,
                 relatedProduct: relatedProduct,
-                cartNum: req.session.cart && req.session.cart.length || 0
+                cartNum: req.session.cart && req.session.cart.length || 0,
+                isLogin: req.session.passport && req.session.passport.user
             }
         )
     } catch(err) {

@@ -5,7 +5,7 @@ import Pagination from '../components/pagination/pagination'
 
 const storeforntPage = (props) => {
   return (
-      <StorefrontLayout categories={props.categories} cartNum={props.cartNum}>
+      <StorefrontLayout categories={props.categories} cartNum={props.cartNum} isLogin={props.isLogin}>
           <ProductList 
             products={props.products.docs}
             search={props.search} 

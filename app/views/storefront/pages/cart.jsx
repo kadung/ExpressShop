@@ -43,7 +43,7 @@ const Cart = (props) => {
     }
     
     return (
-        <StorefrontLayout categories={props.categories} cartNum={props.cartNum}>
+        <StorefrontLayout categories={props.categories} cartNum={props.cartNum} isLogin={props.isLogin}>
             <div className="container pt-5">
                 <div className="card shopping-cart">
                     <div className="card-header bg-dark text-light">

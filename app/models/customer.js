@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate");
+const bcrypt = require('bcrypt-nodejs');
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const customerSchema = new mongoose.Schema({
   firstName: { type: String, default: "" },
@@ -22,6 +23,20 @@ const customerSchema = new mongoose.Schema({
     }
   ]
 });
+
+// Create hash password before save
+customerSchema.pre(
+  'save',
+  function (next) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8), null);
+    next();
+  }
+)
+
+// Valitdate password
+customerSchema.methods.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 customerSchema.plugin(mongoosePaginate);
 

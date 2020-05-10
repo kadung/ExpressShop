@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const flash = require('connect-flash');
 
 const sessionConfig = require('./configs/session');
 const databaseConfig = require('./configs/database');
@@ -35,7 +34,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(sessionConfig.init(db));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 // express routes
 app.use('/', require('./routes/index'));

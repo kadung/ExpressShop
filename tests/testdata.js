@@ -6,11 +6,13 @@ const database = require('../app/configs/database');
 const CategoryModel = require('../app/models/category');
 const ProductModel = require('../app/models/product');
 const AdminModel = require('../app/models/admin');
+const CustomerModel = require('../app/models/customer');
 
 // Model data
 const CategoriesData = require('./data/categories');
 const ProductsData = require('./data/products');
-const AdminData = require('./data/admin-user.json');
+const AdminData = require('./data/admin.json');
+const CustomerData = require('./data/customer.json');
 
 // Connect MongoDB
 mongoose.connect(database.url, { useNewUrlParser: true });
@@ -30,7 +32,7 @@ const insertData = async () => {
         replaceProductsCategoryStringToId(categories);
         await ProductModel.insertMany(ProductsData);
         await new AdminModel(AdminData).save();
-
+        await new CustomerModel(CustomerData).save();
     }
     catch(err) {
         console.log(err);

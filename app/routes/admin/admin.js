@@ -3,9 +3,6 @@ const router = express.Router();
 
 const adminController = require('../../controllers/admin/admin');
 
-/* Admin logout */
-router.get("/logout/");
-
 /* Admin dashboard */
 router.get("/dashboard/", adminController.dashboard);
 
