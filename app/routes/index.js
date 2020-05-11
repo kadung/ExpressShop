@@ -11,14 +11,14 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 const router = express.Router();
 
 /* Authentication */
-router.get("/login", authController.loginPage);
-router.get("/login/admin", authController.loginPage);
-router.post("/login", authController.login);
+router.get("/login", authController.loginPage)
+      .post("/login", authController.login);
+router.get("/login/admin", authController.loginPage)
 router.get("/logout", authController.logout);
 
 /* Registration */
-router.get("/register", authController.registerPage);
-router.post("/register", authController.register);
+router.get("/register", authController.registerPage)
+      .post("/register", authController.register);
 
 /* Storefront */
 router.use("/", productRoutes);

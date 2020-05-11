@@ -1,7 +1,7 @@
 const LocalStrategy  = require('passport-local').Strategy;
 
 const AdminModel = require('../models/admin');
-const CustomerModel = require('../models/customer')
+const CustomerModel = require('../models/customer');
 
 module.exports = (passport) => {
     /* Passport session setup  */
@@ -42,62 +42,27 @@ module.exports = (passport) => {
             passwordField: 'password',
             passReqToCallback: true
         },
-        (req, email, password, done) => {
+        async (req, email, password, done) => {
+            /* 
+                Anything return in done method will transmit to passport.authenticate callback
+                EX:  return done(a,b)  ==> passport.authenticate(strategy, (a,b) => {})
+            */
             let model = CustomerModel;
             if(req.body.type) model = AdminModel;
-
-            model.findOne(
-                {'email': email},
-                (err, user) => {
-                    /* 
-                        Anything return in done method will transmit to passport.authenticate callback
-                        EX:  return done(a,b)  ==> passport.authenticate(strategy, (a,b) => {})
-                    */
-                    // If any system error
-                    if (err) 
-                        return done(err, null);
-                    // User is not found
-                    if (!user)
-                        return done(null, false)
-                    // Password is incorrect
-                    if (!user.validPassword(password))
-                        return done(null, false)
-                    // All is well
-                    return done(null, user);
-                }
-            );
+            
+            try {
+                const user = await model.findOne({'email': email});
+                // User is not found
+                if (!user)
+                    return done(false, false)
+                // Password is incorrect
+                if (!user.validPassword(password))
+                    return done(false, false)
+                // All is well
+                done(false, user);
+            } catch(err) {
+                return done(false, false);
+            };
         })
     );
-
-    /* Customer registration */
-    passport.use(
-        'signup',
-        new LocalStrategy(
-            {
-                usernameField : 'email',
-                passwordField : 'password',
-                passReqToCallback: true
-            },
-            (req, email, password, done) => {
-                CustomerModel.findOne({'email': email})
-                .then(user => {
-                    if (user) return done("This email is used", false);
-                        
-                    const newCustomer = {
-                        firstName: req.body.firstname,
-                        lastName: req.body.lastname,
-                        email: email,
-                        password: password,
-                        addresses: []
-                    }
-                    CustomerModel(newCustomer).save()
-                    .then(user => {
-                        return done(null, user);
-                    })
-                })
-                .catch(next);
-            }
-        )
-    );
-
 }

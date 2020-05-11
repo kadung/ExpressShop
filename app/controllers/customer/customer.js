@@ -5,7 +5,6 @@ exports.getProfile = async (req, res, next) => {
         Category.find(),
     ])
     .then(([categories]) => {
-        console.log(req.session.passport);
         res.render(
             'storefront/pages/customer',
             { 

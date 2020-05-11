@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $("#loginForm").submit(event => {
         event.preventDefault();   // Prevent form send data
-        let redirectUrl = "/123/profile";
+        let redirectUrl = "/profile";
         if (location.pathname.includes("admin")){
           redirectUrl = "/admin/dashboard";
         }

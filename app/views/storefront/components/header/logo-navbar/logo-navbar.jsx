@@ -39,7 +39,6 @@ const LogoNavbar = (props) => {
                             {props.isLogin ? "Profile" : "Register"} 
                         </a>
                     </li>
-                    }
                 </ul>
             </div>
         </nav>
