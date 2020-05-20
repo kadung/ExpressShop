@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongooseTypes = require('mongoose').Types;
 
 const Category = require('../../models/category');
 
@@ -32,7 +32,7 @@ exports.get = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     let existItem = false;
     let newItem = {
-        cartId: mongoose.Types.ObjectId(),
+        cartId: mongooseTypes.ObjectId(),
         productId: req.body.productId,
         productName: req.body.productName,
         productImageUrl: "",
@@ -89,4 +89,8 @@ exports.delete = (req, res, next) => {
         totalCartItems: req.session.cart.length,
         cartTotal: cartTotal
     });  
+}
+
+exports.checkout =  (req, res, next) => {
+    res.render("storefront/pages/checkout")
 }

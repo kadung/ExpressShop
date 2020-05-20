@@ -66,7 +66,7 @@ const Cart = (props) => {
                     </div>
                     <div className="card-footer">
                         <div className="text-right">
-                            <a href="" className="btn btn-success pull-right">Checkout</a>
+                            <a href="/cart/checkout" className="btn btn-success pull-right">Checkout</a>
                         </div>
                     </div>
                 </div>

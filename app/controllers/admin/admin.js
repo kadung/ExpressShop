@@ -1,9 +1,16 @@
+const CategoryModel = require('../../models/category');
+
 exports.dashboard = (req, res, next) => {
     res.render('admin/pages/dashboard');
 }
 
-exports.categoryList = (req, res, next) => {
-    res.render('admin/pages/categories');
+exports.categoryList = async (req, res, next) => {
+    try {
+        const categories = await CategoryModel.find();
+        res.render('admin/pages/categories', {categories: categories});
+    } catch (err) {
+        next(err);
+    }
 }
 
 exports.productList = (req, res, next) => {
@@ -12,4 +19,8 @@ exports.productList = (req, res, next) => {
 
 exports.orderList = (req, res, next) => {
     res.render('admin/pages/orders');
+}
+
+exports.userList = (req, res, next) => {
+    res.render('admin/pages/users');
 }

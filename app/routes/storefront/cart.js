@@ -6,10 +6,13 @@ const cartController = require('../../controllers/storefront/cart');
 /* View cart */
 router.get("/", cartController.get);
 
-/* Add cart */
+/* Add cart item */
 router.post("/add", cartController.add);
 
 /* Delete cart item */
-router.delete("/delete", cartController.delete)
+router.delete("/delete", cartController.delete);
+
+/* Checkout cart */
+router.get("/checkout", cartController.checkout);
 
 module.exports = router;

@@ -15,4 +15,7 @@ router.get("/products/", adminController.productList);
 /* Admin orders */
 router.get("/orders/", adminController.orderList);
 
+/* Admin users */
+router.get("/users/", adminController.userList);
+
 module.exports = router;
