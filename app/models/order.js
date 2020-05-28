@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const counterSchema = new mongoose.Schema({
   counter: {
@@ -16,32 +16,17 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "customer"
   },
-  billingAddress: {
-    firstName: { type: String, default: "" },
-    lastName: { type: String, default: "" },
-    address1: { type: String, default: "" },
-    address2: { type: String, default: "" },
-    city: { type: String, default: "" },
-    state: { type: String, default: "" },
-    zip: { type: String, default: "" },
-    phone: { type: String, default: "" }
-  },
   shippingAddress: {
-    firstName: { type: String, default: "" },
-    lastName: { type: String, default: "" },
-    address1: { type: String, default: "" },
-    address2: { type: String, default: "" },
+    fullName: { type: String, default: "" },
+    address: { type: String, default: "" },
     city: { type: String, default: "" },
-    state: { type: String, default: "" },
-    zip: { type: String, default: "" },
-    phone: { type: String, default: "" }
+    phone: { type: String, default: "" },
+    email: { type: String, default: "" },
   },
   paymentMethod: { type: String, default: "" },
   shippingMethod: { type: String, default: "" },
   ipAddress: { type: String, default: "" },
-  history: [],
   status: { type: String, default: "" },
-  email: { type: String, default: "" },
   date: { type: Date, default: new Date() },
   items: [],
   subtotal: { type: Number, default: 0 },
@@ -59,9 +44,7 @@ orderSchema.pre("save", function(next) {
       this.orderNumber = counter.counter;
       next();
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(console.log);
 });
 
 orderSchema.plugin(mongoosePaginate);

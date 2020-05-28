@@ -1,6 +1,7 @@
 var mongooseTypes = require('mongoose').Types;
 
 const Category = require('../../models/category');
+const Order = require('../../models/order');
 
 exports.get = async (req, res, next) => {
     let cartNum = 0;
@@ -9,7 +10,7 @@ exports.get = async (req, res, next) => {
     const categories = await Category.find();
 
     if (req.session.cart){
-        cartData = req.session.cart
+        cartData = req.session.cart;
         cartNum = cartData.length;
         cartData.forEach(element => {
             cartTotal += element.price * element.quantity;
@@ -91,6 +92,34 @@ exports.delete = (req, res, next) => {
     });  
 }
 
-exports.checkout =  (req, res, next) => {
-    res.render("storefront/pages/checkout")
+exports.getCheckout = async (req, res, next) => {
+    let isLogin = false;
+    let userData = false;
+
+    const categories = await Category.find();
+
+    if (req.session.passport && req.session.passport.user){
+        isLogin = true;
+        userData = req.user;
+    }
+
+    res.render(
+        "storefront/pages/checkout",
+        {
+            categories: categories,
+            cartItems: req.session.cart || [],
+            cartNum: req.session.cart && req.session.cart.length || 0,
+            isLogin: isLogin,
+            userData: userData
+        }
+    )
+}
+
+exports.postCheckout = async (req, res, next) => {
+    // Validate
+    console.log(req.body)
+
+    // Create new order
+
+    // Forward to payment gateway if needed
 }

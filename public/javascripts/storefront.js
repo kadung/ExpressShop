@@ -32,5 +32,19 @@ $(document).ready(function(){
       dataType: 'json'
     });
   });
+
+
+  $('#new-account').on("change", function() {
+      if(this.checked){
+        $('#pass').removeClass('hide');
+        $("#password").prop('required',true);
+        $("#confirmPassword").prop('required',true);
+      }
+      else{
+        $('#pass').addClass('hide');
+        $("#password").prop('required',false);
+        $("#confirmPassword").prop('required',false);
+      }
+  });
 });
 

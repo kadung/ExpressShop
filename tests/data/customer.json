@@ -1,7 +1,15 @@
-{
-    "firstName": "customer",
-    "lastName": "test",
-    "email": "customer@test.com",
-    "password": "test",
-    "addresses": []
-}
+[
+    {
+        "fullName": "customer",
+        "email": "customer@test.com",
+        "password": "test",
+        "address": "123 Street, District 7",
+        "city": "Ho Chi Minh",
+        "phone": "0901234567"
+    },
+    {
+        "fullName": "guest",
+        "email": "guest@test.com",
+        "password": "guest"
+    }
+]

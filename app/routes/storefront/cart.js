@@ -13,6 +13,7 @@ router.post("/add", cartController.add);
 router.delete("/delete", cartController.delete);
 
 /* Checkout cart */
-router.get("/checkout", cartController.checkout);
+router.get("/checkout", cartController.getCheckout)
+      .post("/checkout", cartController.postCheckout);
 
 module.exports = router;

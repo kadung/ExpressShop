@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const adminSchema = new mongoose.Schema({
-  firstName: { type: String, default: "" },
-  lastName: { type: String, default: "" },
+  fullName: { type: String, default: "" },
   email: { type: String, default: "" },
   password: { type: String, default: "" },
   dateAdded: { type: Date, default: new Date() },

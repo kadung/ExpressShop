@@ -32,7 +32,8 @@ const insertData = async () => {
         replaceProductsCategoryStringToId(categories);
         await ProductModel.insertMany(ProductsData);
         await new AdminModel(AdminData).save();
-        await new CustomerModel(CustomerData).save();
+        await new CustomerModel(CustomerData[0]).save();
+        await new CustomerModel(CustomerData[1]).save();
     }
     catch(err) {
         console.log(err);

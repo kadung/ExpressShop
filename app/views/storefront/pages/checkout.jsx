@@ -1,15 +1,15 @@
 import React from 'react';
 import StorefrontLayout from '../layout';
-import Shipping from '../components/checkout/shipping';
-import CartInfo from '../components/checkout/cartInfo';
-import Payment from '../components/checkout/payment';
+import CheckoutItems from '../components/checkout/checkoutItems';
+import CartItems from '../components/checkout/cartItems';
 
 const Checkout = (props) => {
     return (
-        <StorefrontLayout>
-            <Shipping />
-            <CartInfo />
-            <Payment />
+        <StorefrontLayout categories={props.categories} cartNum={props.cartNum} isLogin={props.isLogin}>
+            <div className="row container pt-5">
+                <CheckoutItems userData={props.userData} />
+                <CartItems cartItems={props.cartItems} />
+            </div>
         </StorefrontLayout>
     )
 }

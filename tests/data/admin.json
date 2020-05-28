@@ -1,6 +1,5 @@
 {
-    "firstName": "test",
-    "lastName": "admin",
+    "fullName": "admin",
     "email": "admin@test.com",
     "password": "test",
     "active": true,
